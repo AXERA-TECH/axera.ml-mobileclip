@@ -5,7 +5,7 @@
     "input_configs": [
       {
         "tensor_name": "DEFAULT",
-        "calibration_dataset": "./dataset/imagenet-calib.tar",
+        "calibration_dataset": "../imagenet-calib.tar",
         "calibration_size": 32,
         "calibration_mean": [
           0.0,

@@ -1,0 +1,48 @@
+{
+  "model_type": "ONNX",
+  "npu_mode": "NPU3",
+  "quant": {
+    "input_configs": [
+      {
+        "tensor_name": "DEFAULT",
+        "calibration_dataset": "../imagenet-calib.tar",
+        "calibration_size": 32,
+        "calibration_mean": [   // 根据run_onnx.py中的前处理：(x/255 - [0.48145466, 0.4578275, 0.40821073]) / [0.26862954, 0.26130258, 0.27577711]
+          122.7709383 , 116.7460125 , 104.09373615 // 255 * np.array([0.48145466, 0.4578275, 0.40821073])
+        ],
+        "calibration_std": [
+          68.5005327 , 66.6321579 , 70.32316305  // 255 * np.array([0.26862954, 0.26130258, 0.27577711])
+        ]
+      }
+    ],
+    "calibration_method": "MinMax",
+    "precision_analysis": true,
+    "precision_analysis_method": "EndToEnd",
+    "transformer_opt_level": 1,
+    "layer_configs": [
+      {
+        "start_tensor_names": ["DEFAULT"],
+        "end_tensor_names": ["DEFAULT"],
+        "data_type": "U16",
+        "weight_data_type": "S16"
+      }
+    ],
+    "conv_bias_data_type": "FP32",
+    "precision_analysis_mode": "NPUBackend",
+    // "disable_auto_refine_scale": true
+  },
+  "input_processors": [
+    {
+      "tensor_name": "DEFAULT",
+      "tensor_format": "RGB",
+      "tensor_layout": "NCHW",
+      "src_layout": "NCHW",
+      "src_dtype": "FP32",
+      "mean": [0, 0, 0],
+      "std": [1, 1, 1]
+    }
+  ],
+  "compiler": {
+    "check": 0
+  }
+}
