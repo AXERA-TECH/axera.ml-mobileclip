@@ -4,7 +4,7 @@ from PIL import Image
 import mobileclip
 from mobileclip.modules.common.mobileone import reparameterize_model
 
-model_name = "mobileclip_s2" 
+model_name = "MobileCLIP2-S2" 
 pretrained_path = "/data/wangjian/project/hf_cache/mobileclip/MobileCLIP2-S2/mobileclip2_s2.pt"
 
 if model_name in ["mobileclip_b", "mobileclip_s0", "mobileclip_s1", "mobileclip_s2"]:

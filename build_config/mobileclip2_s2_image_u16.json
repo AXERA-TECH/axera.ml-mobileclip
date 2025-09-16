@@ -7,11 +7,11 @@
         "tensor_name": "DEFAULT",
         "calibration_dataset": "../imagenet-calib.tar",
         "calibration_size": 32,
-        "calibration_mean": [   // 根据run_onnx.py中的前处理：(x/255 - [0.48145466, 0.4578275, 0.40821073]) / [0.26862954, 0.26130258, 0.27577711]
-          122.7709383 , 116.7460125 , 104.09373615 // 255 * np.array([0.48145466, 0.4578275, 0.40821073])
+        "calibration_mean": [
+          0, 0, 0  // NOTICE: mobileclip2-s0 和 mobileclip2-s2 使用v1的预处理，v2的预处理方式在pulsar2中量化误差比较大
         ],
         "calibration_std": [
-          68.5005327 , 66.6321579 , 70.32316305  // 255 * np.array([0.26862954, 0.26130258, 0.27577711])
+          255, 255, 255  
         ]
       }
     ],

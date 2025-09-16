@@ -2,7 +2,9 @@
 
 [ml-mobileclip](https://github.com/apple/ml-mobileclip) demo on axera，目前完成以下模型的适配
 - MobileCLIP-S2
+- MobileCLIP2-S0
 - MobileCLIP2-S2
+- MobileCLIP-S3
 - MobileCLIP2-S4
 
 
@@ -127,7 +129,10 @@ python export_onnx.py
 ### Python API 运行
 需基于[PyAXEngine](https://github.com/AXERA-TECH/pyaxengine)在AX650N上进行部署
 
-demo基于原repo中的提取图文特征向量并计算相似度，将两个axmodel和run_onboard中的文件拷贝到开发板上后，运行run_axmodel.py文件
+demo基于原repo中的提取图文特征向量并计算相似度，将两个axmodel和run_onboard目录下的所有文件scp到开发板上后，运行run_axmodel.py文件
+```bash
+python3 run_axmodel.py -ie ./mobileclip2_s4_image_encoder.axmodel -te ./mobileclip2_s4_text_encoder.axmodel -i ./zebra.jpg -t "a zebra" "a dog" "two zebras"
+```
 
 1. 输入图片：
 

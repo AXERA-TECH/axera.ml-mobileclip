@@ -69,14 +69,16 @@ text_encoder_path = "models/MobileCLIP2-S2_text_encoder.onnx"
 
 if model_name in ["mobileclip_b", "mobileclip_s0", "mobileclip_s1", "mobileclip_s2"]:
     is_v1 = True
-else: # ["MobileCLIP2-S2", "MobileCLIP2-S4"]
+else: # ["MobileCLIP2-S0"， "MobileCLIP2-S2", "MobileCLIP2-S3"， "MobileCLIP2-S4"]
     is_v1 = False
 
 if is_v1:
     preprocess = image_transform_v1()
     tokenizer = mobileclip.get_tokenizer(model_name) # or open_clip.get_tokenizer("ViT-B-16")
 else:
-    preprocess = image_transform_v2()
+    # NOTICE: MobileCLIP2-S0 和 MobileCLIP2-S2需要v1的预处理，v2的预处理在pulsar2中量化误差比较大
+    # MobileCLIP2-S3 和 MobileCLIP2-S4 都可以
+    preprocess = image_transform_v1()
     tokenizer = open_clip.get_tokenizer(model_name)
     
 image = preprocess(Image.open("docs/fig_accuracy_latency.png").convert('RGB')).unsqueeze(0)
